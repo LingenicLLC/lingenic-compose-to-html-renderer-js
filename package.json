@@ -1,0 +1,58 @@
+{
+  "name": "lingenic-compose-html-renderer",
+  "version": "0.1.0",
+  "description": "Lingenic Compose to HTML renderer with KaTeX math support",
+  "license": "Apache-2.0",
+  "author": "Lingenic LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingenic/lingenic-compose-to-html-renderer-js.git"
+  },
+  "homepage": "https://compose.lingenic.com",
+  "keywords": [
+    "compose",
+    "lingenic",
+    "html",
+    "renderer",
+    "parser",
+    "katex",
+    "math",
+    "latex",
+    "typography",
+    "document"
+  ],
+  "type": "module",
+  "main": "lingenic-compose-html-renderer.umd.js",
+  "module": "lingenic-compose-html-renderer.esm.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lingenic-compose-html-renderer.esm.js",
+      "require": "./lingenic-compose-html-renderer.umd.js",
+      "types": "./index.d.ts"
+    },
+    "./style.css": "./lingenic-compose-html-renderer.css"
+  },
+  "files": [
+    "lingenic-compose-html-renderer.esm.js",
+    "lingenic-compose-html-renderer.umd.js",
+    "lingenic-compose-html-renderer.css",
+    "index.d.ts",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "katex": ">=0.16.0"
+  },
+  "peerDependenciesMeta": {
+    "katex": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

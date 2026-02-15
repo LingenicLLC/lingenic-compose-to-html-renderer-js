@@ -1,0 +1,246 @@
+/**
+ * lingenic-compose-html-renderer.css
+ * Default stylesheet for Compose → HTML rendered output.
+ *
+ * All classes use the `cr-` prefix.
+ * Override any rule by increasing specificity or loading after this sheet.
+ */
+
+/* ── Page Container ── */
+
+.cr-page {
+  max-width: 44rem;
+  margin: 2rem auto;
+  padding: 2.5rem 2rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+/* ── Page Header / Footer ── */
+
+.cr-page-header,
+.cr-page-footer {
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  padding: 0.5rem 0;
+}
+.cr-page-header { border-bottom: 1px solid #ddd; margin-bottom: 1.5rem; }
+.cr-page-footer { border-top: 1px solid #ddd; margin-top: 2rem; }
+
+/* ── Alignment ── */
+
+.cr-align-left   { text-align: left; }
+.cr-align-center { text-align: center; }
+.cr-align-right  { text-align: right; }
+.cr-align-both   { text-align: justify; }
+
+/* ── Titles ── */
+
+.cr-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2rem 0 0.6rem;
+}
+
+/* ── Paragraphs ── */
+
+.cr-p {
+  margin: 0.6rem 0;
+}
+
+/* ── Indentation ── */
+
+.cr-indent-left  { margin-left: 2rem; }
+.cr-indent-right { margin-right: 2rem; }
+.cr-indent-both  { margin-left: 2rem; margin-right: 2rem; }
+
+/* ── Variables & Counters ── */
+
+.cr-var,
+.cr-counter {
+  background: #fff3cd;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.92em;
+}
+
+/* ── Cross-References ── */
+
+.cr-ref {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+/* ── Citations ── */
+
+.cr-cite {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* ── Lists ── */
+
+.cr-list {
+  margin: 0.6rem 0 0.6rem 1.6rem;
+}
+.cr-list li {
+  margin: 0.3rem 0;
+}
+.cr-list-numbered { list-style-type: decimal; }
+.cr-list-bulleted { list-style-type: disc; }
+
+.cr-dl { margin: 0.6rem 0; }
+.cr-dt { font-weight: 700; margin-top: 0.5rem; }
+.cr-dd { margin-left: 1.5rem; color: #444; }
+
+/* ── Mathematics ── */
+
+.cr-math-block,
+.cr-math-align {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  overflow-x: auto;
+  text-align: center;
+  background: #f8f8f8;
+  border-left: 3px solid #999;
+  border-radius: 0 3px 3px 0;
+}
+
+.cr-math-inline { display: inline; }
+
+.cr-math-fallback {
+  background: #f0f0f0;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* ── Preformatted & Literal ── */
+
+.cr-pre,
+.cr-literal {
+  font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', monospace;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  margin: 0.8rem 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+.cr-pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+.cr-literal {
+  background: #272822;
+  color: #f0f0e8;
+}
+
+/* ── Keep Block ── */
+
+.cr-keep {
+  page-break-inside: avoid;
+  padding: 0.6rem 1rem;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  margin: 0.8rem 0;
+  background: #fcfcfc;
+}
+
+/* ── Footnotes & Notes ── */
+
+.cr-footnote,
+.cr-endnote {
+  font-size: 0.88rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.cr-sidenote {
+  float: right;
+  width: 30%;
+  margin: 0 0 0.5rem 1rem;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  border-left: 2px solid #ddd;
+}
+
+/* ── Horizontal Rules ── */
+
+.cr-hr {
+  border: none;
+  margin: 1.2rem 0;
+  color: #999;
+}
+
+/* ── Figures ── */
+
+.cr-figure {
+  margin: 1rem 0;
+  text-align: center;
+}
+.cr-graphic {
+  max-width: 100%;
+  height: auto;
+}
+.cr-caption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* ── Drop Cap ── */
+
+.cr-drop-cap {
+  float: left;
+  font-size: calc(var(--dc-lines, 3) * 1.3em);
+  line-height: 0.85;
+  padding-right: 0.08em;
+  font-weight: 700;
+}
+
+/* ── Page Break ── */
+
+.cr-page-break {
+  page-break-after: always;
+  height: 0;
+}
+
+/* ── Space ── */
+
+.cr-space {
+  height: 1.5rem;
+}
+
+/* ── Ruby ── */
+
+ruby { ruby-position: over; }
+rt { font-size: 0.5em; }
+
+/* ── Print ── */
+
+@media print {
+  .cr-page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .cr-literal { background: #eee; color: #222; }
+  .cr-page-break { page-break-after: always; }
+}

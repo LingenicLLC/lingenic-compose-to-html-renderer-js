@@ -134,3 +134,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+node_modules/     # npm dependencies                                                                                  
+.DS_Store         # macOS system files                                                                                
+.idea/, .vscode/  # IDE configs                                                                                       
+*.log             # log files                                                                                         
+coverage/         # test coverage reports                                                                             
+dist/, build/     # build output (if source added later)                                                              
+.env              # environment variables                                                                             
