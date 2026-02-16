@@ -1,6 +1,6 @@
 /**
- * lingenic-compose-html-renderer v0.1.0
- * Lingenic Compose → HTML renderer with KaTeX math support.
+ * lingenic-compose-html-renderer v0.2.0
+ * Lingenic Compose 2.0 → HTML renderer with KaTeX math support.
  * https://compose.lingenic.com
  * License: MIT
  */
@@ -350,30 +350,30 @@ export function parse(source) {
     // ── Commands ──
     if (trimmed.startsWith('.')) {
 
-      // Page header
-      if (trimmed.startsWith('.begin-page-header')) {
+      // Page header (v2.0: .begin-header, legacy: .begin-page-header)
+      if (trimmed.startsWith('.begin-header') || trimmed.startsWith('.begin-page-header')) {
         const parity = trimmed.includes('even') ? 'even' : trimmed.includes('odd') ? 'odd' : 'all';
         i++;
         const inner = [];
         let align = 'center';
-        while (i < lines.length && !lines[i].trim().startsWith('.end-page-header')) {
+        while (i < lines.length && !lines[i].trim().startsWith('.end-header') && !lines[i].trim().startsWith('.end-page-header')) {
           const t = lines[i].trim();
           if (t.startsWith('.align-')) align = t.replace('.align-', '');
           else if (!t.startsWith('.') && t !== '') inner.push(t);
           i++;
         }
-        i++; // skip .end-page-header
+        i++; // skip .end-header
         nodes.push({ type: 'page-header', props: { parity, align }, text: inner.join(' ') });
         continue;
       }
 
-      // Page footer
-      if (trimmed.startsWith('.begin-page-footer')) {
+      // Page footer (v2.0: .begin-footer, legacy: .begin-page-footer)
+      if (trimmed.startsWith('.begin-footer') || trimmed.startsWith('.begin-page-footer')) {
         const parity = trimmed.includes('even') ? 'even' : trimmed.includes('odd') ? 'odd' : 'all';
         i++;
         const inner = [];
         let align = 'center';
-        while (i < lines.length && !lines[i].trim().startsWith('.end-page-footer')) {
+        while (i < lines.length && !lines[i].trim().startsWith('.end-footer') && !lines[i].trim().startsWith('.end-page-footer')) {
           const t = lines[i].trim();
           if (t.startsWith('.align-')) align = t.replace('.align-', '');
           else if (!t.startsWith('.') && t !== '') inner.push(t);
@@ -384,7 +384,19 @@ export function parse(source) {
         continue;
       }
 
-      // Text title
+      // Title (v2.0: .title "text", legacy: .begin-text-title/.end-text-title)
+      if (trimmed.startsWith('.title ')) {
+        const m = trimmed.match(/^\.title\s+"([^"]+)"(?:\s+label=(\S+))?/) ||
+                  trimmed.match(/^\.title\s+(.+)/);
+        if (m) {
+          const text = m[1];
+          const label = m[2] || '';
+          nodes.push({ type: 'text-title', props: { label }, text });
+        }
+        i++; continue;
+      }
+
+      // Text title (legacy: .begin-text-title/.end-text-title)
       if (trimmed === '.begin-text-title' || trimmed.startsWith('.begin-text-title ')) {
         i++;
         let label = '';
@@ -498,11 +510,12 @@ export function parse(source) {
         continue;
       }
 
-      // Literal block
-      if (trimmed === '.block-begin-literal' || trimmed.startsWith('.block-begin-literal ')) {
+      // Literal block (v2.0: .begin-literal, legacy: .block-begin-literal)
+      if (trimmed === '.begin-literal' || trimmed.startsWith('.begin-literal ') ||
+          trimmed === '.block-begin-literal' || trimmed.startsWith('.block-begin-literal ')) {
         i++;
         const litLines = [];
-        while (i < lines.length && lines[i].trim() !== '.block-end-literal') {
+        while (i < lines.length && lines[i].trim() !== '.end-literal' && lines[i].trim() !== '.block-end-literal') {
           litLines.push(lines[i]);
           i++;
         }
@@ -511,18 +524,32 @@ export function parse(source) {
         continue;
       }
 
-      // Keep block
-      if (trimmed === '.block-begin-keep' || trimmed.startsWith('.block-begin-keep ')) {
+      // Keep block (v2.0: .begin-keep, legacy: .block-begin-keep)
+      if (trimmed === '.begin-keep' || trimmed.startsWith('.begin-keep ') ||
+          trimmed === '.block-begin-keep' || trimmed.startsWith('.block-begin-keep ')) {
         i++;
-        const keepLines = collectContentUntil('.block-end-keep');
+        const keepLines = [];
+        while (i < lines.length) {
+          const t = lines[i].trim();
+          if (t === '.end-keep' || t === '.block-end-keep') { i++; break; }
+          if (!t.startsWith('.') && t !== '') keepLines.push(t);
+          i++;
+        }
         nodes.push({ type: 'keep', text: keepLines.join(' ') });
         continue;
       }
 
-      // Footnote
-      if (trimmed === '.block-begin-footnote' || trimmed.startsWith('.block-begin-footnote ')) {
+      // Footnote (v2.0: .begin-footnote, legacy: .block-begin-footnote)
+      if (trimmed === '.begin-footnote' || trimmed.startsWith('.begin-footnote ') ||
+          trimmed === '.block-begin-footnote' || trimmed.startsWith('.block-begin-footnote ')) {
         i++;
-        const fnLines = collectContentUntil('.block-end-footnote');
+        const fnLines = [];
+        while (i < lines.length) {
+          const t = lines[i].trim();
+          if (t === '.end-footnote' || t === '.block-end-footnote') { i++; break; }
+          if (!t.startsWith('.') && t !== '') fnLines.push(t);
+          i++;
+        }
         nodes.push({ type: 'footnote', text: fnLines.join(' ') });
         continue;
       }
