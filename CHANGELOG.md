@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-02-16
+
+### Changed
+- Updated to Lingenic Compose 2.0 specification
+- Command renames with backward compatibility:
+  - `.begin-header`/`.end-header` (was `.begin-page-header`/`.end-page-header`)
+  - `.begin-footer`/`.end-footer` (was `.begin-page-footer`/`.end-page-footer`)
+  - `.begin-literal`/`.end-literal` (was `.block-begin-literal`/`.block-end-literal`)
+  - `.begin-keep`/`.end-keep` (was `.block-begin-keep`/`.block-end-keep`)
+  - `.begin-footnote`/`.end-footnote` (was `.block-begin-footnote`/`.block-end-footnote`)
+  - `.title "text"` single-line command (was `.begin-text-title`/`.end-text-title`)
+- Legacy command names still supported for backward compatibility
+
 ## [0.1.0] - 2026-02-15
 
 ### Added

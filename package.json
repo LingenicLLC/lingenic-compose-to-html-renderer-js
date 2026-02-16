@@ -1,7 +1,7 @@
 {
   "name": "lingenic-compose-html-renderer",
-  "version": "0.1.0",
-  "description": "Lingenic Compose to HTML renderer with KaTeX math support",
+  "version": "0.2.0",
+  "description": "Lingenic Compose 2.0 to HTML renderer with KaTeX math support",
   "license": "Apache-2.0",
   "author": "Lingenic LLC",
   "repository": {
