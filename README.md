@@ -1,6 +1,6 @@
 # ｢‍｣ Lingenic Compose HTML Renderer
 
-｢‍｣ Lingenic Compose → HTML renderer with KaTeX math support.
+｢‍｣ Lingenic Compose 2.0 → HTML renderer with KaTeX math support.
 
 Parses `.compose` source files and renders them to semantic HTML. Math expressions (Unicode per ISO 80000-2) are converted to LaTeX and rendered via KaTeX.
 
@@ -25,11 +25,9 @@ import { render } from 'lingenic-compose-html-renderer';
 import katex from 'katex';
 
 const source = `
-.* ｢‍｣ Lingenic Compose
+.* ｢‍｣ Lingenic Compose 2.0
 
-.begin-text-title
-Hello, Compose
-.end-text-title
+.title "Hello, Compose"
 
 The area of a circle is %math: 𝐴 = π𝑟² %.
 `;
